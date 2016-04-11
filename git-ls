@@ -2,21 +2,20 @@
 
 r=$(tput setaf 1)
 g=$(tput setaf 2)
-y=$(tput setaf 3)
 c=$(tput setaf 6)
 rs=$(tput sgr0)
 
 for dir in */; do
-  path=$(realpath $dir)
-  branch=$(git -C $path rev-parse --abbrev-ref HEAD 2>/dev/null)
+  path=$(realpath "${dir}")
+  branch=$(git -C "${path}" rev-parse --abbrev-ref HEAD 2>/dev/null)
   if [[ ! -z "$branch" ]]; then
-    if [[ -z $(git -C $path status -s 2>/dev/null) ]]; then
+    if [[ -z $(git -C "${path}" status -s 2>/dev/null) ]]; then
       echo "${c}${dir}${rs} [${g}${branch}${rs}]"
       echo
     else
       echo "${c}${dir}${rs} [${r}${branch}${rs}]"
-      git -C $path status -s $path
+      git -C "${path}" status -s "${path}"
       echo
     fi
   fi
- done
+done
