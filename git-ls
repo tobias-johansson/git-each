@@ -2,7 +2,6 @@
 
 r=$(tput setaf 1)
 g=$(tput setaf 2)
-y=$(tput setaf 3)
 c=$(tput setaf 6)
 rs=$(tput sgr0)
 
