@@ -19,4 +19,4 @@ for dir in */; do
       echo
     fi
   fi
- done
+done
