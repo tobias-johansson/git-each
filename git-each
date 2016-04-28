@@ -1,0 +1,22 @@
+#!/bin/bash
+
+r=$(tput setaf 1)
+g=$(tput setaf 2)
+c=$(tput setaf 6)
+rs=$(tput sgr0)
+
+for dir in */; do
+  path=$(realpath "${dir}")
+  branch=$(git -C "${path}" rev-parse --abbrev-ref HEAD 2>/dev/null)
+  if [[ ! -z "$branch" ]]; then
+    if [[ -z $(git -C "${path}" status -s 2>/dev/null) ]]; then
+      echo "${c}${dir}${rs} [${g}${branch}${rs}]"
+      [[ -n "$@" ]] && git -C "${path}" $@
+      echo
+    else
+      echo "${c}${dir}${rs} [${r}${branch}${rs}]"
+      [[ -n "$@" ]] && git -C "${path}" $@
+      echo
+    fi
+  fi
+done
