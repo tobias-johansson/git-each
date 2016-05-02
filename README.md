@@ -43,57 +43,31 @@ machine-setup/ [master]
 ```
 
 ### `git each`
-`git each <command>` basically runs a `git <command>` in each repository in the current folder. (`git ls` is short for `git each status -s`)
+`git each <command>` basically runs `git <command>` in each repository in the current folder.
 ```bash
-$ git each log -1
+$ git each log --oneline -1
 ammonite-reload/ [master]
-commit e669ac1c801d645b8b551189f868568169d31aea
-Author: Tobias Johansson <tobias.johansson@seal-software.com>
-Date:   Tue Apr 12 10:48:42 2016 +0200
-
-    Add readme
+e669ac1 Add readme
 
 circe/ [ops-to-path-printer]
-commit 41aeffd09e73fd142f414f3e4543932ff7541a62
-Author: Tobias Johansson <tobias.johansson@seal-software.com>
-Date:   Sat Apr 23 18:23:45 2016 +0200
-
-    Test
+41aeffd Test
 
 dk/ [master]
-commit 4819bd0469290be284ebe555e624efeaa208c003
-Author: Tobias Johansson <tobias.j.e.johansson@gmail.com>
-Date:   Mon Mar 21 13:54:46 2016 +0100
+4819bd0
 
 git-each/ [master]
-commit 064159f27f5b5a8cc09c287919d63147c142729a
-Author: Tobias Johansson <tobias.johansson@seal-software.com>
-Date:   Thu Apr 28 09:48:26 2016 +0200
-
-    Generalize into git-each
+d272bbc Update readme for git-each
 
 git-wip/ [master]
-commit 0f0c5823b958e4334e903980b6101e3d024a286b
-Author: Mattias Bengtsson <mattias.jc.bengtsson@gmail.com>
-Date:   Sat Apr 23 18:15:00 2016 +0200
-
-    Rework: Add flags
+0f0c582 Rework: Add flags
 
 machine-setup/ [master]
-commit 615aea0a9ec258fe6305101c7bc44a722fcd8cc0
-Author: Tobias Johansson <tobias.johansson@seal-software.com>
-Date:   Sat Apr 23 15:58:05 2016 +0200
-
-    More
-
-oh-my-fish/ [master]
-commit 60b17c9c70db0c6f42b33068c604aca5902633db
-Author: Tobias Johansson <tobias.johansson@appland.se>
-Date:   Fri Jan 16 09:01:28 2015 +0100
-
-    peco_select_history can take initial query
-
+615aea0 More
 ```
+
+As you might have spotted, `git ls` is simply shorthand for `git each status -s`
+
+
 You can of course also perform actions in each repository, like
 ```bash
 git each checkout release/4.1.0
@@ -101,4 +75,17 @@ git each checkout release/4.1.0
 or
 ```bash
 git each pull
+```
+
+Both `git ls` and `git each` can be run on a subset of repos like so:
+```bash
+$ git each branch :: circe/ git-each/
+circe/ [ops-to-path-printer]
+ master
+* ops-to-path-printer
+ some-none-codecs
+ v0.3.0
+
+git-each/ [master]
+* master
 ```

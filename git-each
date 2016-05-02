@@ -5,17 +5,33 @@ g=$(tput setaf 2)
 c=$(tput setaf 6)
 rs=$(tput sgr0)
 
-for dir in */; do
+declare -a cmds=()
+declare -a dirs=()
+while [[ -n "$1" && "$1" != "::" ]]; do
+  cmds+=("$1"); shift
+done
+if [[ "$1" == "::" ]]; then
+  shift
+  while [[ -n "$1" ]]; do
+    dirs+=("$1"); shift
+  done
+fi
+
+if [[ -z "${dirs[@]}" ]]; then
+  dirs=(*/)
+fi
+
+for dir in "${dirs[@]}"; do
   path=$(realpath "${dir}")
   branch=$(git -C "${path}" rev-parse --abbrev-ref HEAD 2>/dev/null)
   if [[ ! -z "$branch" ]]; then
     if [[ -z $(git -C "${path}" status -s 2>/dev/null) ]]; then
       echo "${c}${dir}${rs} [${g}${branch}${rs}]"
-      [[ -n "$@" ]] && git -C "${path}" $@
+      [[ -n "${cmds[@]}" ]] && git -C "${path}" "${cmds[@]}"
       echo
     else
       echo "${c}${dir}${rs} [${r}${branch}${rs}]"
-      [[ -n "$@" ]] && git -C "${path}" $@
+      [[ -n "${cmds[@]}" ]] && git -C "${path}" "${cmds[@]}"
       echo
     fi
   fi
