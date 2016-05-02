@@ -1,7 +1,7 @@
 `git ls` and `git each`
 =================
 
-Utils for working with sets of repos that are not submodules.
+Utils for working with sets of git repos (that are not submodules)
 
 - `git ls` List multiple git repos and show their statuses.
 - `git each` Run git commands in multiple git repos at once
@@ -23,7 +23,8 @@ Usage
 ```bash
 $ ls
 amm-demo/  ammonite-reload/  circe/  dk/  git-ls/  machine-setup/  rest/  tmp/
-
+```
+```bash
 $ git ls
 
 ammonite-reload/ [master]
@@ -76,6 +77,8 @@ or
 ```bash
 git each pull
 ```
+
+### Filtering
 
 Both `git ls` and `git each` can be run on a subset of repos like so:
 ```bash
