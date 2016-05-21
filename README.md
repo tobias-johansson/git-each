@@ -9,10 +9,10 @@ Utils for working with sets of git repos (that are not submodules)
 Installation
 ------------
 ```bash
-$ wget https://github.com/tobias-johansson/git-each/raw/master/git-ls
-$ wget https://github.com/tobias-johansson/git-each/raw/master/git-each
-$ chmod +x git-ls git-each
-$ mv git-ls git-each /usr/local/bin # or whatever
+$ git clone https://github.com/tobias-johansson/git-each.git
+$ cd git-each
+$ make user-install   # install to ~/.local/bin/
+$ make install        # ...or to /usr/local/bin/
 ```
 
 Usage
